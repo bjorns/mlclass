@@ -14,9 +14,9 @@ for iter = 1:num_iters
 
     h = X * theta;
 
-    S = sum((h-y)*X(;2))
 
-    theta = theta - alpha / m * S;
+    theta(1) = theta(1) - alpha * sum((h-y).*X(:,1))/m;
+    theta(2) = theta(2) - alpha * sum((h-y).*X(:,2))/m;
 
 end
 
