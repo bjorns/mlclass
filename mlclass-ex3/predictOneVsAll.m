@@ -30,13 +30,13 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
-
-
-
-% =========================================================================
-
+  for ex=1:size(X,1);
+    h = zeros(num_labels,1);
+    for c=1:num_labels
+      h(c) = X(ex,:) * all_theta(c,:)';
+    end
+    [x,i] = max(h);
+    p(ex) = i;
+  end
 
 end
