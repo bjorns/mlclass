@@ -13,21 +13,7 @@ g = zeros(size(z));
 %               each value of z (z can be a matrix, vector or scalar).
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-% =============================================================
-
-
-
+one = ones(size(z));
+g = sigmoid(z).*(one - sigmoid(z));
 
 end
