@@ -88,11 +88,7 @@ end
 
 J = J/m;
 
-
-
-
-
-
+% Calculate regularized cost function.
 regCost = 0;
 
 t1 = Theta1(:,2:end);
@@ -106,8 +102,37 @@ regCost = regCost * lambda / 2 / m;
 J = J + regCost;
 
 
+DELTA1 = zeros(size(Theta1));
+DELTA2 = zeros(size(Theta2));
+
+% Calculate back-propagation
+for t = 1:m,
+    a1 = [1 X(t,:)]';
+    z2 = Theta1 * a1;
+    a2 = [1; sigmoid(z2)];
+    z3 = Theta2 * a2;
+    a3 = sigmoid(z3);
+
+
+    delta3 = a3 - Y(t,:)';
+    DELTA2 = DELTA2 + delta3 * a2';
+
+
+    delta2 = Theta2' * delta3 .* [1; sigmoidGradient(z2)];
+    delta2 = delta2(2:end);
+    DELTA1 = DELTA1 + delta2 * a1';
+    
+end
+
+Theta1_grad(:,1) = DELTA1(:,1) / m;
+Theta1_grad(:,2:end) = (DELTA1(:,2:end) + lambda * Theta1(:,2:end)) / m;
+
+Theta2_grad(:,1) = DELTA2(:,1) / m;
+Theta2_grad(:,2:end) = (DELTA2(:,2:end) + lambda * Theta2(:,2:end)) / m;
+
+
+
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
 
 end
