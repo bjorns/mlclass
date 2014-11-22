@@ -27,13 +27,13 @@ centroids = zeros(K, n);
 %
 
 
+for i=1:K,
+  indices = find(idx==i);
+  points = X(indices, :);
 
-
-
-
-
-
-% =============================================================
+  C_k = (1/size(points, 1));
+  centroids(i,:) = C_k * sum(points);
+end
 
 
 end
