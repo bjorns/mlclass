@@ -20,12 +20,22 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
+m = size(X,1);
 
-
-
-
-
-
+for i=1:size(X),
+  point = X(i,:);
+  min_j = -1;
+  min_dist = intmax('int64');
+  for j=1:K,
+    centroid = centroids(j,:);
+    dist = sqrt(sum((centroid - point).^2));
+    if dist < min_dist
+      min_dist = dist;
+      min_j = j;
+    end
+    idx(i) = min_j;
+  end
+end
 
 % =============================================================
 
