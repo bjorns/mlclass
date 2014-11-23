@@ -19,7 +19,15 @@ Z = zeros(size(X, 1), K);
 %
 
 
+%for i=1:size(X,1),
+%  x = X(i,:)';
+%  u = U(:,1:K)
+%  projection_k = x' * u;
+%  Z(i,:) = projection_k;
+%end
 
+U_r = U(:,1:K);
+Z = X * U_r;
 
 % =============================================================
 
