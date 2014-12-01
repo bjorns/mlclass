@@ -48,9 +48,17 @@ Theta_grad = zeros(size(Theta));
 %  end
 %end
 
-tmp = (X*Theta' - Y).^2;
+
+pred = X*Theta';
+diff = pred - Y;
+tmp = diff.^2;
 tmp = tmp .* R; % Filter with R
 J = sum(tmp(:)) / 2;
+
+
+tmp = diff .* R;
+X_grad = tmp * Theta;
+Theta_grad = tmp' * X;
 
 
 grad = [X_grad(:); Theta_grad(:)];
