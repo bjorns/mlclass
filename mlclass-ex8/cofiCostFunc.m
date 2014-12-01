@@ -54,7 +54,9 @@ diff = pred - Y;
 tmp = diff.^2;
 tmp = tmp .* R; % Filter with R
 J = sum(tmp(:)) / 2;
-
+reg = sum(sum(Theta.^2)) + sum(sum(X.^2));
+reg = lambda * reg / 2;
+J = J + reg;
 
 tmp = diff .* R;
 X_grad = tmp * Theta;
