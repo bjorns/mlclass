@@ -59,8 +59,8 @@ reg = lambda * reg / 2;
 J = J + reg;
 
 tmp = diff .* R;
-X_grad = tmp * Theta;
-Theta_grad = tmp' * X;
+X_grad = tmp * Theta + lambda * X;
+Theta_grad = tmp' * X + lambda * Theta;
 
 
 grad = [X_grad(:); Theta_grad(:)];
